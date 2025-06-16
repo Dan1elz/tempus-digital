@@ -1,0 +1,72 @@
+<div class="w-full h-screen grid place-items-center text-neutral-800 bg-neutral-100">
+  <div class="w-full max-w-xs h-[350px] p-4 flex flex-wrap rounded-lg shadow-md bg-white">
+    <form method="post" (submit)="onSubmit($event)" [noValidate]="false" class="w-full flex flex-wrap justify-center">
+      <div class="w-full flex justify-center text-xl font-semibold mb-2">
+        <h2>Login</h2>
+      </div>
+
+      <div class="w-full h-10 flex items-center relative mt-2">
+        <input
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="actor.email"
+          name="email"
+          minlength="5"
+          maxlength="50"
+          required
+          class="w-full h-full border-b border-neutral-400 bg-transparent px-6 text-sm focus:outline-none focus:border-blue-500"
+        />
+        <span class="absolute left-1">
+          <i class="bi bi-person text-lg text-neutral-600"></i>
+        </span>
+      </div>
+
+      <div class="w-full h-10 flex items-center relative mt-2">
+        <input
+          [type]="typePassword"
+          [(ngModel)]="actor.password"
+          placeholder="Password"
+          name="password"
+          minlength="8"
+          maxlength="32"
+          required
+          class="w-full h-full border-b border-neutral-400 bg-transparent px-6 text-sm focus:outline-none focus:border-blue-500"
+        />
+        <span class="absolute left-1">
+          <i class="bi bi-lock text-lg text-neutral-600"></i>
+        </span>
+        <span
+          class="absolute right-1 cursor-pointer text-neutral-600 hover:text-blue-500 transition"
+          (click)="onEyeToggle()"
+          >
+          <i [ngClass]="icon"></i>
+        </span>
+      </div>
+
+      <button
+        type="submit"
+        class="w-full h-10 mt-4 rounded-lg shadow-md uppercase font-medium text-white bg-neutral-600 hover:bg-neutral-700 transition"
+      >
+        Login
+      </button>
+    </form>
+  </div>
+
+  <span
+    [ngClass]="{ 'alert': true, 'error': hasError, 'success': hasSuccess }"
+    class="fixed top-10 left-1/2 -translate-x-1/2 w-full max-w-xs h-12 px-4 rounded-lg shadow-md flex items-center justify-between transition
+      opacity-0
+      cursor-context-menu
+      "
+    [class.opacity-100]="hasError || hasSuccess"
+    [class.bg-green-500]="hasSuccess"
+    [class.text-white]="hasSuccess"
+    [class.bg-red-500]="hasError"
+    [class.text-white]="hasError"
+  >
+    {{ message }}
+    <button (click)="CloseAlert()" class="border-none outline-none bg-transparent text-inherit cursor-pointer">
+      x
+    </button>
+  </span>
+</div>

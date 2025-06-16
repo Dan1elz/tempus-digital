@@ -1,0 +1,46 @@
+<div class="p-6">
+ <div class="mb-6">
+  <label for="period-select" class="block text-sm font-medium text-gray-700 mb-2">Período</label>
+  <div class="relative w-full md:w-64">
+    <select
+      id="period-select"
+      [(ngModel)]="selectedPeriod"
+      (change)="loadDashboard()"
+      class="block w-full appearance-none rounded-xl border border-gray-300 bg-white px-4 py-2 pr-10 text-gray-700 shadow-sm transition focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200"
+    >
+      <option value="today">Hoje</option>
+      <option value="week">Esta semana</option>
+      <option value="month">Este mês</option>
+    </select>
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-500">
+      <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.293l3.71-4.06a.75.75 0 011.08 1.04l-4.25 4.65a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+    <div class="bg-white rounded-lg shadow p-4">
+      <h2 class="text-lg font-semibold text-gray-700">Renda média</h2>
+      <p class="text-xl font-bold text-blue-600"> R$ {{ (dashboardData()?.average_income ?? 0) | number:'1.2-2' }}</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-4">
+      <h2 class="text-base font-semibold text-gray-700">Clientes acima da média</h2>
+      <p class="text-3xl font-bold text-blue-600">{{ dashboardData()?.high_income_adults ?? 0 }}</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-4">
+      <h2 class="text-lg font-semibold text-gray-700">Classe A</h2>
+      <p class="text-3xl font-bold text-green-600">{{ dashboardData()?.class_distribution?.A ?? 0}}</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-4">
+      <h2 class="text-lg font-semibold text-gray-700">Classe B</h2>
+      <p class="text-3xl font-bold text-yellow-600">{{ dashboardData()?.class_distribution?.B ?? 0 }}</p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-4">
+      <h2 class="text-lg font-semibold text-gray-700">Classe C</h2>
+      <p class="text-3xl font-bold text-red-600">{{ dashboardData()?.class_distribution?.C ?? 0 }}</p>
+    </div>
+  </div>
+</div>

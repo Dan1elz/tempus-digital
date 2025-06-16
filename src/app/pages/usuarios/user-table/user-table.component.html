@@ -1,0 +1,83 @@
+<div class="bg-white rounded-lg shadow p-6">
+  <div class="flex justify-start">
+    <h2 class="text-lg font-semibold text-gray-800">Usuários</h2>
+  </div>
+  <div class="flex justify-between items-center mb-4 flex-wrap">
+    <div class="flex gap-3">
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          placeholder="Pesquisar usuarios..."
+          class="bg-white flex h-9 w-full rounded-md border border-gray-200 focus:border-blue-600 outline-none px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+        />
+        <button
+          (click)="onSearch()"
+          class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded outiline-none"
+        >
+          <i class="bi bi-search"></i>
+        </button>
+      </div>
+    <a
+      class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
+      [routerLink]="['/auth/usuarios/item/']" routerLinkActive="router-link-active"
+    >
+      <i class="bi bi-plus-lg"></i> Criar
+    </a>
+  </div>
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+          <th scope="col" class="px-6 py-3" *ngFor="let column of columns">
+            {{ column.header }}
+          </th>
+          <th scope="col" class="px-6 py-3">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200" *ngFor="let item of data">
+          <td class="px-6 py-4" *ngFor="let column of columns">
+            <ng-container *ngIf="column.key === columns[0].key; else otherCells">
+              <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {{ item[column.key] }}
+              </th>
+            </ng-container>
+            <ng-template #otherCells>
+              {{ item[column.key] }}
+            </ng-template>
+          </td>
+          <td class="px-6 py-4 text-lg">
+            <a [routerLink]="['/auth/usuarios/item/'+ item.id]" routerLinkActive="router-link-active"  class="text-blue-600 dark:text-blue-500 hover:underline"><i class="bi bi-pencil"></i></a>
+            /
+            <a (click)="onOpenModal(item.id)"class=" text-blue-600 dark:text-blue-500 hover:underline"><i class="bi bi-trash"></i></a>
+          </td>
+        </tr>
+        <tr *ngIf="loading">
+          <td [colSpan]="columns.length + 1" class="text-center py-4">Loading...</td>
+        </tr>
+        <tr *ngIf="!loading && data.length === 0">
+          <td [colSpan]="columns.length + 1" class="text-center py-4">No data available.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<dialog
+  #modal
+  class="rounded-lg shadow-xl p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 backdrop:bg-black backdrop:opacity-50 max-w-lg w-full
+         fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-50"
+>
+  <div class="top-[50%] left-[50%] flex justify-between pb-4 border-b border-gray-200 dark:border-gray-700 mb-4">
+    <p class="text-xl font-semibold">Voce tem certeza que deseja deletar esse usuario?</p>
+    <button (click)="onCloseModal()" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors duration-200 outline-none">
+      <i class="bi bi-x text-2xl"></i>
+    </button>
+  </div>
+  <div class="flex justify-end space-x-3">
+    <button (click)="onCloseModal()" class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200">Cancel</button>
+    <button (click)="onDelete()" class="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition-colors duration-200">Confirm</button>
+  </div>
+</dialog>
