@@ -91,16 +91,25 @@ export class ClientTableComponent {
   }
 
   formatRenda(value: number): string {
-    return `R$ ${value.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
+    return `R$${value.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, '.')}`;
   }
 
-  getBadgeClass(value: number): string {
+  getBadgeStyle(value: number): { [key: string]: string } {
     if (value <= 980) {
-      return 'bg-red-500 text-white';
+      return {
+        backgroundColor: '#ef4444',
+        color: '#fff',
+      };
     } else if (value <= 2500) {
-      return 'bg-yellow-400 text-black';
+      return {
+        backgroundColor: '#facc15',
+        color: '#000',
+      };
     } else {
-      return 'bg-green-500 text-white';
+      return {
+        backgroundColor: '#22c55e',
+        color: '#fff',
+      };
     }
   }
 }

@@ -62,17 +62,6 @@ export class UserTableComponent {
         },
       });
   }
-
-  setCurrentPage(page: number) {
-    this.currentPage = page;
-    this.fetchUsers();
-  }
-
-  setPageSize(size: number) {
-    this.pageSize = size;
-    this.currentPage = 1;
-    this.fetchUsers();
-  }
   onOpenModal(id: string) {
     this.modal.nativeElement.showModal();
     this.modal.nativeElement.classList.add('active');

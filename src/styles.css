@@ -3,8 +3,6 @@
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import "tailwindcss";
 * {
-  /* margin: 0; */
-  /*padding: 0; */
   font-family: "Open Sans", sans-serif;
   box-sizing: border-box;
 }
@@ -13,39 +11,6 @@
   font-family: "Pacifico", cursive;
   font-weight: 400;
   font-style: normal;
-}
-
-.md-w-input-sm {
-  width: 100%;
-}
-
-.md-w-input-md {
-  width: 100%;
-}
-
-.md-w-input-lg {
-  width: 100%;
-}
-
-.md-w-input-xl {
-  width: 100%;
-}
-
-@media (min-width: 828px) { /* md equivale a 768px no Tailwind */
-  .md-w-input-sm {
-    width: calc((400px - (0.25rem * 4)) / 2);
-  }
-
-  .md-w-input-md {
-    width: 250px;
-  }
-
-  .md-w-input-lg {
-    width: 400px;
-  }
-  .md-w-input-xl {
-    width: calc(400px + 1rem + ((400px - (0.25rem * 4)) / 2));
-  }
 }
 
 .form-input {

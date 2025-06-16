@@ -18,10 +18,10 @@
         </button>
       </div>
     <a
-      class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
+      class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-1 px-4 rounded"
       [routerLink]="['/auth/clientes/item/']" routerLinkActive="router-link-active"
     >
-      <i class="bi bi-plus-lg"></i> Criar
+      <i class="bi bi-plus-lg"></i> Adicionar
     </a>
   </div>
 
@@ -48,8 +48,8 @@
             <ng-template #otherCells>
               <ng-container *ngIf="column.key === 'renda_familiar'; else defaultCell">
                 <span
-                  class="px-3 py-1 rounded-full text-sm font-semibold"
-                  [ngClass]="getBadgeClass(+item[column.key]!)"
+                  [style]="getBadgeStyle(+item[column.key]!)"
+                  style="padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 600;"
                 >
                   {{ formatRenda(+item[column.key]!) }}
                 </span>

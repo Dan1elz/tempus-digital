@@ -25,7 +25,7 @@ export class LoginComponent {
     Event.preventDefault();
 
     this.service.onLogin(this.actor).subscribe({
-      next: (response) => {
+      next: () => {
         this.message = 'Usuario logado com sucesso!';
         this.onOpenSuccess();
       },
